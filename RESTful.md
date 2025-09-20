@@ -1,0 +1,11 @@
+| HTTP Method (Verb) | Path/Endpoint/URI     | CRUD Operation            | Route Name | Has Data Payload? | Purpose                                                                                            | Render/Redirect Action        |
+| ------------------ | --------------------- | ------------------------- | ---------- | ----------------- | -------------------------------------------------------------------------------------------------- | ----------------------------- |
+| GET                | `/cars`              | Read all _cars_          | index      | No                | Displays a list of all cars                                                                | `res.render('cars/index')`   |
+| GET                | `/blogs/:carNumberId`      | Read a specific _car_    | show       | No                | Renders a view that shows a specific car                                                          | `res.render('cars/show')`    |
+| GET                | `/cars/new`          | None                      | new        | No                | Renders a view including a form the user can fill out and submit to add a new car                 | `res.render('cars/new')`     |
+| GET                | `/cars/:carId/edit` | See note below*           | edit       | No                | Renders a view including a filled out form the user can edit and submit to update a specific car  | `res.render('cars/edit')`    |
+| POST               | `/cars`              | Create a new _car_       | create     | Yes               | Handles the user submitting a form to create a new car                                            | `res.redirect('/you-choose')` |
+| PUT                | `/cars/:carId`      | Update a specific _car_  | update     | Yes               | Handles the user submitting a form to update a specific car                                       | `res.redirect('/you-choose')` |
+| DELETE             | `/cars/:carId`      | Delete a specific _car_  | delete     | No                | Handles the user request to delete a specific car                                                 | `res.redirect('/you-choose')` |
+
+*NOTE*: The `edit` route may optionally read data for a specific blog to pre-fill data in the form that will ultimately be rendered to the user.
