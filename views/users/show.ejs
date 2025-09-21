@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= userName %> Recipes</title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar.ejs') %>
+    
+    <h1><%= userName %> Recipes</h1>
+
+    <% if (selectedUser.pantry.length > 0){ %>
+      <ul>
+        <% userRecipes.forEach((food)=>{ %>
+          <li>
+            <strong>Recipe name:</strong> <%= food.name %>
+            <strong>Recipe class:</strong> <%= food.class %>
+            
+            <strong>Ingredients:</strong>
+            <ul>
+              <% food.ingredients.forEach((ingredient) => { %>
+                <li><%= ingredient %></li>
+              <% }) %>
+            </ul>
+
+          </li>
+        <% }) %>
+      </ul>
+
+    <% } else { %>
+      <h3>There are no items in this pantry.</h3>
+    <% } %>
+
+  </body>
+</html>
