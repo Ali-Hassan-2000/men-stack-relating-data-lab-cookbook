@@ -15,6 +15,7 @@ const passUserToView = require("./middleware/pass-user-to-view.js");
 
 // Controllers
 const authController = require('./controllers/auth.js');
+const foodsController = require('./controllers/foods.js');
 
 // Set the port from environment variable or default to 3000
 const port = process.env.PORT ? process.env.PORT : '3000';
@@ -54,10 +55,7 @@ app.use('/auth', authController);
 
 /* ----------------------------------- ROUTES --------------------------------------- */
 // PROTECTED
-
-app.get("/vip-lounge", isSignedIn, (req, res) => {
-    res.send(`Welcome to the party ${req.session.user.username}.`);
-});
+app.use('/users/:userId/foods', isSignedIn, foodsController);
 
 /* ----------------------------------- TCP --------------------------------------- */
 app.listen(port, () => {

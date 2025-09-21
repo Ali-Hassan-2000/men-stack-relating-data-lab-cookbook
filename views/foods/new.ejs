@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title>Add a New Recipe</title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar.ejs') %>
+    
+    <h1>Add a New Recipe</h1>
+
+    <form action="/users/<%= user._id %>/foods" method="POST">
+
+    <label for="name">Recipe name:</label>
+    <input type="text" name="name" id="name" required/>
+
+    <label for="class">Recipe class:</label>
+    <select id="class" name="class" required>
+        <option value="Appetizer">Appetizer</option>
+        <option value="Entrée">Entrée</option>
+        <option value="Dessert">Dessert</option>
+        <option value="Starter">Starter</option>
+    </select>
+
+    <label for="ingredients">Recipe ingredients:</label>
+    <div id="ingredients-container">
+      <input type="text" name="ingredients"/>
+    </div>
+    <button type="button" onclick="addIngredient()">Add Another Ingredient</button>
+
+    <button type="submit">Add Recipe</button>
+    
+    </form>
+
+  </body>
+
+  <script> <!-- function for adding a text area to add more Ingredients to the array-->
+    function addIngredient() {
+      const ingredientsContainer = document.getElementById('ingredients-container');
+      const newIngredientInput = document.createElement('input');
+      
+      newIngredientInput.type = 'text';
+      newIngredientInput.name = 'ingredients';
+      ingredientsContainer.appendChild(newIngredientInput);
+    }
+  </script>
+
+</html>

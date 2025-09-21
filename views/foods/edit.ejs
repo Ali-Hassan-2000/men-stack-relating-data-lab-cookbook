@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title>Editing <%= food.name %></title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar.ejs') %>
+    
+    <h1>Edit <%= food.name %> recipe</h1>
+
+    <form action="/users/<%= user._id %>/foods/<%= food._id %>?_method=PUT" method="POST">
+    
+        <label for="name">Recipe name:</label>
+        <input type="text" name="name" id="name" value="<%= food.name %>" required/>
+
+        <label for="class">Recipe class:</label>
+        <select id="class" name="class" required>
+          <option value="Appetizer" <%= food.class === 'Appetizer' ? 'selected' : '' %> >Appetizer</option>
+          <option value="Entrée" <%= food.class === 'Entrée' ? 'selected' : '' %> >Entrée</option>
+          <option value="Dessert" <%= food.class === 'Dessert' ? 'selected' : '' %> >Dessert</option>
+          <option value="Starter" <%= food.class === 'Starter' ? 'selected' : '' %> >Starter</option>
+        </select>
+
+        <label for="ingredients">Ingredients:</label>
+        <div id="ingredients-container">
+          <% food.ingredients.forEach((ingredient) => { %>
+            <div>
+              <input type="text" name="ingredients" value="<%= ingredient %>" />
+              <button type="button" onclick="removeIngredient(this.parentNode)">Remove</button>
+            </div>
+          <% }) %>
+        </div>
+        <button type="button" onclick="addIngredient()">Add Another Ingredient</button>
+
+
+        <button type="submit">Update Recipe</button>
+    </form>
+
+  </body>
+
+  <script>  <!-- function for adding a text area to add more Ingredients to the array-->
+    function addIngredient() { 
+      const ingredientsContainer = document.getElementById('ingredients-container');
+      const newIngredientInput = document.createElement('input');
+
+      newIngredientInput.type = 'text';
+      newIngredientInput.name = 'ingredients';
+      newIngredientInput.placeholder = 'Ingredient';
+      ingredientsContainer.appendChild(newIngredientInput);
+      }
+
+      function removeIngredient(input) {
+        const ingredientsContainer = document.getElementById('ingredients-container');
+        ingredientsContainer.removeChild(input);
+      }
+  </script>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title>My Pantry</title>
+  </head>
+  <body>
+    <%- include("../partials/_navbar.ejs"); %>
+
+    <h1>Welcome <%= userName %></h1>
+
+    <h1>Your Recipes</h1>
+
+    <% if (IsThereAnyPantry > 0){ %> <!-- if pantry is not empty display recipes otherwise display the message-->
+
+      <ul>
+        <% foods.forEach((food)=>{ %>
+          <a href="/users/<%= user._id %>/foods/<%= food._id %>" >
+            <li>
+              Recipe name: <%= food.name %>
+              Recipe class: <%= food.class %>
+
+              <form action="/users/<%= user._id %>/foods/<%= food._id %>?_method=DELETE"method="POST">
+                <button type="submit">Delete this recipe</button>
+              </form>
+            </li>
+          </a>
+        <% }) %>
+      </ul>
+
+    <% } else { %>
+      <h3><%= message %></h3>
+    <% } %>
+    
+    <a href="/users/<%=user._id%>/foods/new">Add a recipe</a>
+  
+  </body>
+</html>
